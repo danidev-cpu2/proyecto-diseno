@@ -1,0 +1,589 @@
+@import "variables";
+@import "mixins";
+@import "functions";
+
+* {
+  font-family: $font-sentinels;
+  margin: 0 !important;
+}
+
+body {
+  @include bg-image-cover("../../images/background/fondo.png");
+  background-attachment: fixed;
+
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+
+  //Scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+
+  &::-webkit-scrollbar-track {
+    background: $scroll-fuera;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-scroll;
+
+  }
+}
+
+.bg-custom {
+  @include bg-image-cover("../../images/index/indexImg.png");
+
+  height: 100vh;
+  mask-image: linear-gradient($color-black 80%, transparent);
+}
+
+input[type="checkbox"] {
+  &:checked {
+    background-color: page-theme(true);
+    border-color: $color-text-red;
+    box-shadow: none;
+  }
+
+  &:not(:checked) {
+    background-color: page-theme(false);
+    border-color: $color-text-red;
+    box-shadow: none;
+  }
+}
+
+/*Tema blanco*/
+body:has(input[type="checkbox"]:checked) {
+  @include bg-image-cover("../../images/background/fondo-blanco.png");
+  //background-image: url("../../images/background/fondo-blanco.png");
+
+  .bg-custom {
+    @include bg-image-cover("../../images/index/indexImg-blanco.jpg");
+    height: 100vh;
+    mask-image: linear-gradient($color-black 80%, transparent);
+  }
+
+  header {
+    background-color: $color-white;
+
+    .header-sentinels {
+      span {
+        color: $color-black;
+      }
+    }
+
+    a {
+      text-shadow: 1px 1px 20px $color-black;
+    }
+  }
+
+  footer {
+    background-color: $color-white;
+
+    span {
+      color: $color-black;
+    }
+  }
+
+  #form {
+    @include white-box($color-border-light);
+
+    #form-title {
+      border-bottom: 1px solid $color-border-light;
+    }
+
+    #form-content {
+      input {
+        @include red-gradient-bg($color-red-soft, $color-red-deep);
+        color: $color-black;
+      }
+
+      textarea {
+        @include red-gradient-bg($color-red-soft, $color-red-deep);
+        color: $color-black;
+      }
+    }
+
+    #buttons {
+      button {
+        @include red-gradient-bg($color-red-soft, $color-red-deep);
+        color: $color-black;
+      }
+    }
+  }
+
+  .partido {
+    background-color: border-light-rgba();
+
+    #versus {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(62%) saturate(2100%) hue-rotate(345deg) brightness(70%) contrast(90%);
+    }
+  }
+
+  .estadisticas {
+    background-color: $color-white !important;
+    border-color: $color-black !important;
+
+    .estadisticas-title {
+      border-color: $color-black !important;
+
+      .text-estadisticas-title {
+        color: $color-player-border !important;
+      }
+    }
+
+    .text-partidosJugados {
+      color: $color-black !important;
+    }
+
+    .win,
+    .lose,
+    .empate {
+      .textmarcador {
+        color: $color-player-border !important;
+      }
+
+      .numeros {
+        color: $color-black !important;
+      }
+    }
+
+    .text-win-rate,
+    .porcentaje-win {
+      color: $color-black !important;
+    }
+  }
+
+  .card-text {
+    border-color: $color-border-light;
+    background-color: $color-white;
+    color: $color-black;
+    text-spacing-trim: 10px;
+  }
+
+  .card-image-title {
+    background-color: $color-white;
+  }
+}
+
+/*Tema negro*/
+body:has(input[type="checkbox"]:not(:checked)) {
+  header {
+    background-color: $color-black;
+
+    .header-sentinels {
+      span {
+        color: $color-white;
+      }
+    }
+
+    a {
+      text-shadow: 1px 1px 45px $color-white;
+    }
+  }
+
+  footer {
+    background-color: $color-black;
+  }
+}
+
+header {
+  border-bottom: solid 1px;
+  border-color: $color-border-light;
+  display: flex;
+  @include header-responsive-design;
+
+  .header-sentinels {
+    padding: 1em 2.5em 1em 2.5em;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+
+    img {
+      width: clamp(3em, 8vw, 4em);
+      height: auto;
+      margin-right: 25px !important;
+    }
+
+    span {
+      font-family: $font-sentinels;
+      color: $color-white;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 900;
+      display: block;
+    }
+  }
+
+  .header-nav {
+    width: 80%;
+    margin-left: 5em ;
+    display: flex;
+    align-items: center;
+    gap: clamp(2em, 5vw, 8em);
+
+    a {
+      text-decoration: none;
+      transform: scale(1.4, 2);
+      font-size: clamp(1rem, 1vw, 1.5rem);
+      font-weight: 900;
+      width: auto;
+      @include header-button-color($color-text-red);
+    }
+  }
+
+  .header-checkbox {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: end;
+  }
+}
+
+footer {
+  border-top: solid 1px;
+  border-color: $color-border-light;
+  position: relative;
+  z-index: 10;
+
+  span {
+    color: $color-border-light;
+    display: block;
+    text-align: center;
+    margin-top: 35px !important;
+  }
+
+  div {
+    margin-top: 10px !important;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly;
+
+    img {
+      width: 2.5em;
+    }
+  }
+}
+
+/*INDEX*/
+.mainIndex {
+  #contacto {
+    min-height: 100vh;
+    padding: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+  }
+
+  #image-valo {
+    @include sentinel-drop-shadow;
+    height: auto;
+    width: auto;
+
+    img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  #logoSentinelsIndex {
+    @include sentinel-drop-shadow;
+  }
+
+  #form {
+    @include black-box($color-white);
+
+    text-align: left;
+    height: 40rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+
+    #form-title {
+      width: 100%;
+      border-bottom: 1px solid $color-white;
+      text-align: center;
+    }
+
+    #form-content {
+      padding: 20px 30px;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 18px;
+      }
+
+      input {
+        @include red-input-style;
+        background-image: linear-gradient($color-red-light 0%,
+            $color-red-dark 90%);
+
+        height: 30px;
+
+        padding-left: 10px;
+      }
+
+      textarea {
+        @include red-input-style;
+        background-image: linear-gradient($color-red-light 0%,
+            $color-red-dark 90%);
+
+        height: 150px;
+        padding: 10px;
+        resize: none;
+      }
+    }
+
+    #buttons {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 20px;
+
+      button {
+        @include red-button;
+
+        width: 8rem;
+        height: 40px;
+        background-image: linear-gradient($color-red-light 0%,
+            $color-red-dark 90%);
+        font-size: 18px;
+      }
+    }
+  }
+
+  @include index-responsive-desing;
+}
+
+/*---------MATCHES-------------*/
+
+#mainMatches {
+  display: grid;
+  grid-template-columns: 1fr 802px;
+  gap: 20px;
+  margin: 0.7em 0.7em !important;
+  min-height: 60dvh;
+
+  #results {
+    display: grid;
+    grid-auto-rows: 20vh;
+    gap: 30px;
+    width: 80%;
+    margin: auto !important;
+    align-items: center;
+
+
+    .partido {
+      position: relative;
+      background-color: border-light-rgba();
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      border-radius: 10px;
+
+      h2 {
+        color: $color-white;
+      }
+
+      .enemy-team {
+        margin-right: 25px !important;
+      }
+
+      img {
+        height: 97px;
+        width: auto;
+        margin-left: 100px;
+      }
+
+      .color-derrota,
+      .color-victoria,
+      .color-empate {
+        position: absolute;
+        right: 0;
+        width: 28px;
+        height: 100%;
+      }
+
+      .color-derrota {
+        background-color: $color-match-red;
+      }
+
+      .color-victoria {
+        background-color: $color-match-green;
+      }
+
+      .color-empate {
+        background-color: $color-match-yellow;
+      }
+    }
+  }
+
+  .estadisticas {
+    width: 702px;
+    height: 727px;
+    background-color: $color-black;
+    border: 3px solid $color-border-light;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+
+
+    .estadisticas-title {
+      height: 75px;
+      text-align: center;
+      border-bottom: 3px solid $color-border-light;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+
+      .text-estadisticas-title {
+        font-family: $font-general !important;
+        font-weight: 100;
+        color: $color-text-red;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: -0.02em;
+      }
+    }
+
+    .partidosJugados {
+      display: flex;
+      margin-top: 30px !important;
+
+      .text-partidosJugados {
+        font-family: $font-general;
+        font-weight: 100;
+        color: $color-text-red;
+        font-size: 24px;
+        margin-left: 70px !important;
+        text-align: center;
+      }
+    }
+
+    .marcador {
+      height: 35vh;
+      display: flex;
+
+      .win,
+      .lose,
+      .empate {
+        margin: auto !important;
+
+        .textmarcador {
+          font-size: 80px;
+          color: $color-text-red;
+        }
+
+        .numeros {
+          font-size: 60px;
+          color: $color-white;
+        }
+      }
+    }
+
+    .win-rate {
+      display: flex;
+      flex-direction: column;
+
+      .text-win-rate,
+      .porcentaje-win {
+        font-size: 60px;
+        color: $color-white;
+        text-align: center;
+      }
+    }
+  }
+
+  @include matches-resonsive-design;
+}
+
+/*---------------Fin de matches-------------------*/
+
+.mainPlayers {
+  .card-text {
+    padding: 15px;
+    height: auto;
+    width: 35vw;
+    color: $color-white;
+    border: 1px $color-white solid;
+    background-color: $color-black;
+
+    .card-text-title1 {
+      display: flex;
+
+      .cudradito {
+        margin-right: 10px;
+        position: relative;
+        top: 20px;
+        background-color: $color-player-border;
+        height: 20px;
+        width: 5px;
+      }
+    }
+
+    .card-text-subtitle {
+      margin-top: -10px;
+      font-size: 25px;
+    }
+
+    .card-text-p {
+      margin-top: 10px;
+      font-size: 16px;
+      width: 33vw;
+      color: $color-grey-muted;
+    }
+
+    .card-text-icon {
+      margin-top: 5vh;
+      margin-left: 5vw;
+
+      img {
+        margin: 20px;
+        height: 25px;
+      }
+    }
+  }
+
+  .card-image {
+    object-fit: contain;
+
+    .card-image-title {
+      padding: 10px 0 10px 30px;
+      background-color: $color-black;
+      position: relative;
+      height: 70px;
+
+      border-left: 5px $color-player-border solid;
+      border-right: 5px $color-player-border solid;
+      border-top: 5px $color-player-border solid;
+
+      h2 {
+        margin-top: 10px;
+        color: $color-player-border;
+        font-size: 50px;
+      }
+    }
+
+    img {
+      height: 60vh;
+      border: 5px $color-player-border solid;
+    }
+  }
+
+  .players {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    margin-bottom: 200px;
+    min-height: 100dvh;
+  }
+
+  @include players-responsive-design;
+}

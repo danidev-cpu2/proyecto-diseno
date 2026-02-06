@@ -1,0 +1,608 @@
+@charset "UTF-8";
+@keyframes animated-header-button {
+  0% {
+    transform: scale(1.4, 2); }
+  100% {
+    transform: scale(1.8, 2.4); } }
+* {
+  font-family: "Orbitron", sans-serif;
+  margin: 0 !important; }
+
+body {
+  background-image: url("../../images/background/fondo.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto; }
+  body::-webkit-scrollbar {
+    width: 10px; }
+  body::-webkit-scrollbar-track {
+    background: #141414; }
+  body::-webkit-scrollbar-thumb {
+    background-color: #e70737; }
+
+.bg-custom {
+  background-image: url("../../images/index/indexImg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  mask-image: linear-gradient(black 80%, transparent); }
+
+input[type="checkbox"]:checked {
+  background-color: page-theme(true);
+  border-color: #CE0037;
+  box-shadow: none; }
+input[type="checkbox"]:not(:checked) {
+  background-color: page-theme(false);
+  border-color: #CE0037;
+  box-shadow: none; }
+
+/*Tema blanco*/
+body:has(input[type="checkbox"]:checked) {
+  background-image: url("../../images/background/fondo-blanco.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; }
+  body:has(input[type="checkbox"]:checked) .bg-custom {
+    background-image: url("../../images/index/indexImg-blanco.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    mask-image: linear-gradient(black 80%, transparent); }
+  body:has(input[type="checkbox"]:checked) header {
+    background-color: #F5F5F7; }
+    body:has(input[type="checkbox"]:checked) header .header-sentinels span {
+      color: black; }
+    body:has(input[type="checkbox"]:checked) header a {
+      text-shadow: 1px 1px 20px black; }
+  body:has(input[type="checkbox"]:checked) footer {
+    background-color: #F5F5F7; }
+    body:has(input[type="checkbox"]:checked) footer span {
+      color: black; }
+  body:has(input[type="checkbox"]:checked) #form {
+    background-color: white;
+    border: 1px solid #AEAEAE;
+    color: black; }
+    body:has(input[type="checkbox"]:checked) #form #form-title {
+      border-bottom: 1px solid #AEAEAE; }
+    body:has(input[type="checkbox"]:checked) #form #form-content input {
+      background-image: linear-gradient(#ff6666 0%, #b30000 90%);
+      color: black; }
+    body:has(input[type="checkbox"]:checked) #form #form-content textarea {
+      background-image: linear-gradient(#ff6666 0%, #b30000 90%);
+      color: black; }
+    body:has(input[type="checkbox"]:checked) #form #buttons button {
+      background-image: linear-gradient(#ff6666 0%, #b30000 90%);
+      color: black; }
+  body:has(input[type="checkbox"]:checked) .partido {
+    background-color: rgba(174, 174, 174, 0.7); }
+    body:has(input[type="checkbox"]:checked) .partido #versus {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(62%) saturate(2100%) hue-rotate(345deg) brightness(70%) contrast(90%); }
+  body:has(input[type="checkbox"]:checked) .estadisticas {
+    background-color: #F5F5F7 !important;
+    border-color: black !important; }
+    body:has(input[type="checkbox"]:checked) .estadisticas .estadisticas-title {
+      border-color: black !important; }
+      body:has(input[type="checkbox"]:checked) .estadisticas .estadisticas-title .text-estadisticas-title {
+        color: #B60525 !important; }
+    body:has(input[type="checkbox"]:checked) .estadisticas .text-partidosJugados {
+      color: black !important; }
+    body:has(input[type="checkbox"]:checked) .estadisticas .win .textmarcador,
+    body:has(input[type="checkbox"]:checked) .estadisticas .lose .textmarcador,
+    body:has(input[type="checkbox"]:checked) .estadisticas .empate .textmarcador {
+      color: #B60525 !important; }
+    body:has(input[type="checkbox"]:checked) .estadisticas .win .numeros,
+    body:has(input[type="checkbox"]:checked) .estadisticas .lose .numeros,
+    body:has(input[type="checkbox"]:checked) .estadisticas .empate .numeros {
+      color: black !important; }
+    body:has(input[type="checkbox"]:checked) .estadisticas .text-win-rate,
+    body:has(input[type="checkbox"]:checked) .estadisticas .porcentaje-win {
+      color: black !important; }
+  body:has(input[type="checkbox"]:checked) .card-text {
+    border-color: #AEAEAE;
+    background-color: #F5F5F7;
+    color: black;
+    text-spacing-trim: 10px; }
+  body:has(input[type="checkbox"]:checked) .card-image-title {
+    background-color: #F5F5F7; }
+
+/*Tema negro*/
+body:has(input[type="checkbox"]:not(:checked)) header {
+  background-color: black; }
+  body:has(input[type="checkbox"]:not(:checked)) header .header-sentinels span {
+    color: #F5F5F7; }
+  body:has(input[type="checkbox"]:not(:checked)) header a {
+    text-shadow: 1px 1px 45px #F5F5F7; }
+body:has(input[type="checkbox"]:not(:checked)) footer {
+  background-color: black; }
+
+header {
+  border-bottom: solid 1px;
+  border-color: #AEAEAE;
+  display: flex; }
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column; }
+      header nav {
+        margin-left: 4em !important;
+        gap: 2em;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-between; }
+      header div {
+        padding: 0.5em 0; }
+        header div img {
+          width: clamp(2.5em, 15vw, 3em); }
+        header div span {
+          font-size: clamp(1.2rem, 5vw, 1.8rem); } }
+  @media (max-width: 480px) {
+    header nav {
+      margin-left: 2em !important; }
+    header div img {
+      width: 2em; }
+    header div span {
+      font-size: 1.2rem; } }
+  header .header-sentinels {
+    padding: 1em 2.5em 1em 2.5em;
+    height: auto;
+    display: flex;
+    align-items: flex-end; }
+    header .header-sentinels img {
+      width: clamp(3em, 8vw, 4em);
+      height: auto;
+      margin-right: 25px !important; }
+    header .header-sentinels span {
+      font-family: "Orbitron", sans-serif;
+      color: #F5F5F7;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 900;
+      display: block; }
+  header .header-nav {
+    width: 80%;
+    margin-left: 5em;
+    display: flex;
+    align-items: center;
+    gap: clamp(2em, 5vw, 8em); }
+    header .header-nav a {
+      text-decoration: none;
+      transform: scale(1.4, 2);
+      font-size: clamp(1rem, 1vw, 1.5rem);
+      font-weight: 900;
+      width: auto;
+      /* código para el botón de header*/
+      color: #CE0037; }
+      header .header-nav a:hover {
+        animation: animated-header-button 0.5s ease 0s normal none;
+        transform: scale(1.8, 2.4); }
+  header .header-checkbox {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    justify-content: end; }
+
+footer {
+  border-top: solid 1px;
+  border-color: #AEAEAE;
+  position: relative;
+  z-index: 10; }
+  footer span {
+    color: #AEAEAE;
+    display: block;
+    text-align: center;
+    margin-top: 35px !important; }
+  footer div {
+    margin-top: 10px !important;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly; }
+    footer div img {
+      width: 2.5em; }
+
+/*INDEX*/
+.mainIndex #contacto {
+  min-height: 100vh;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10%; }
+.mainIndex #image-valo {
+  filter: drop-shadow(0 4px 6px #220207);
+  height: auto;
+  width: auto; }
+  .mainIndex #image-valo img {
+    height: auto;
+    width: 100%; }
+.mainIndex #logoSentinelsIndex {
+  filter: drop-shadow(0 4px 6px #220207); }
+.mainIndex #form {
+  background-color: black;
+  border: 1px solid #F5F5F7;
+  color: white;
+  text-align: left;
+  height: 40rem;
+  width: 30rem;
+  display: flex;
+  flex-direction: column;
+  padding: 5px; }
+  .mainIndex #form #form-title {
+    width: 100%;
+    border-bottom: 1px solid #F5F5F7;
+    text-align: center; }
+  .mainIndex #form #form-content {
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column; }
+    .mainIndex #form #form-content label {
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-size: 18px; }
+    .mainIndex #form #form-content input {
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      border: 0;
+      border-radius: 5px;
+      width: 100%;
+      color: white;
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      height: 30px;
+      padding-left: 10px; }
+    .mainIndex #form #form-content textarea {
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      border: 0;
+      border-radius: 5px;
+      width: 100%;
+      color: white;
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      height: 150px;
+      padding: 10px;
+      resize: none; }
+  .mainIndex #form #buttons {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px; }
+    .mainIndex #form #buttons button {
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      width: 8rem;
+      height: 40px;
+      background-image: linear-gradient(#ff4d4d 0%, #cc0000 90%);
+      font-size: 18px; }
+@media (max-width: 1024px) {
+  .mainIndex #contacto {
+    flex-direction: column;
+    padding: 3rem;
+    gap: 5%; }
+  .mainIndex #form {
+    width: 45rem;
+    height: auto; }
+  .mainIndex #form-title h2 {
+    font-size: 32px; }
+  .mainIndex #form-content label {
+    font-size: 20px; }
+  .mainIndex #image-valo {
+    width: auto; } }
+@media (max-width: 768px) {
+  .mainIndex #contacto {
+    flex-direction: column;
+    padding: 2rem;
+    height: auto; }
+  .mainIndex #form {
+    margin-left: 0 !important;
+    width: 90%;
+    height: auto; }
+  .mainIndex #form-content {
+    padding: 20px 30px; }
+  .mainIndex #form-title h2 {
+    font-size: 28px; }
+  .mainIndex #buttons {
+    display: flex;
+    justify-content: center;
+    gap: auto; }
+  .mainIndex #buttons button {
+    width: 100%; } }
+@media (max-width: 480px) {
+  .mainIndex #contacto {
+    padding: 1rem; }
+  .mainIndex #form {
+    width: 100%; }
+  .mainIndex #form-title h2 {
+    font-size: 24px; }
+  .mainIndex #form-content label {
+    font-size: 18px; }
+  .mainIndex #form-content {
+    padding: 15px; }
+  .mainIndex #form-content textarea {
+    height: 120px; }
+  .mainIndex #buttons button {
+    font-size: 16px;
+    height: 35px; }
+  .mainIndex footer div img {
+    width: 1.8em; } }
+
+/*---------MATCHES-------------*/
+#mainMatches {
+  display: grid;
+  grid-template-columns: 1fr 802px;
+  gap: 20px;
+  margin: 0.7em 0.7em !important;
+  min-height: 60dvh; }
+  #mainMatches #results {
+    display: grid;
+    grid-auto-rows: 20vh;
+    gap: 30px;
+    width: 80%;
+    margin: auto !important;
+    align-items: center; }
+    #mainMatches #results .partido {
+      position: relative;
+      background-color: rgba(174, 174, 174, 0.7);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      border-radius: 10px; }
+      #mainMatches #results .partido h2 {
+        color: #F5F5F7; }
+      #mainMatches #results .partido .enemy-team {
+        margin-right: 25px !important; }
+      #mainMatches #results .partido img {
+        height: 97px;
+        width: auto;
+        margin-left: 100px; }
+      #mainMatches #results .partido .color-derrota,
+      #mainMatches #results .partido .color-victoria,
+      #mainMatches #results .partido .color-empate {
+        position: absolute;
+        right: 0;
+        width: 28px;
+        height: 100%; }
+      #mainMatches #results .partido .color-derrota {
+        background-color: #D82D3C; }
+      #mainMatches #results .partido .color-victoria {
+        background-color: #1C9D48; }
+      #mainMatches #results .partido .color-empate {
+        background-color: #E3B336; }
+  #mainMatches .estadisticas {
+    width: 702px;
+    height: 727px;
+    background-color: black;
+    border: 3px solid #AEAEAE;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto !important;
+    margin-bottom: auto !important; }
+    #mainMatches .estadisticas .estadisticas-title {
+      height: 75px;
+      text-align: center;
+      border-bottom: 3px solid #AEAEAE;
+      justify-content: center;
+      align-items: center;
+      display: flex; }
+      #mainMatches .estadisticas .estadisticas-title .text-estadisticas-title {
+        font-family: "Oswald", sans-serif !important;
+        font-weight: 100;
+        color: #CE0037;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: -0.02em; }
+    #mainMatches .estadisticas .partidosJugados {
+      display: flex;
+      margin-top: 30px !important; }
+      #mainMatches .estadisticas .partidosJugados .text-partidosJugados {
+        font-family: "Oswald", sans-serif;
+        font-weight: 100;
+        color: #CE0037;
+        font-size: 24px;
+        margin-left: 70px !important;
+        text-align: center; }
+    #mainMatches .estadisticas .marcador {
+      height: 35vh;
+      display: flex; }
+      #mainMatches .estadisticas .marcador .win,
+      #mainMatches .estadisticas .marcador .lose,
+      #mainMatches .estadisticas .marcador .empate {
+        margin: auto !important; }
+        #mainMatches .estadisticas .marcador .win .textmarcador,
+        #mainMatches .estadisticas .marcador .lose .textmarcador,
+        #mainMatches .estadisticas .marcador .empate .textmarcador {
+          font-size: 80px;
+          color: #CE0037; }
+        #mainMatches .estadisticas .marcador .win .numeros,
+        #mainMatches .estadisticas .marcador .lose .numeros,
+        #mainMatches .estadisticas .marcador .empate .numeros {
+          font-size: 60px;
+          color: #F5F5F7; }
+    #mainMatches .estadisticas .win-rate {
+      display: flex;
+      flex-direction: column; }
+      #mainMatches .estadisticas .win-rate .text-win-rate,
+      #mainMatches .estadisticas .win-rate .porcentaje-win {
+        font-size: 60px;
+        color: #F5F5F7;
+        text-align: center; }
+  @media (max-width: 1600px) {
+    #mainMatches {
+      grid-template-columns: 1fr 400px; }
+      #mainMatches .estadisticas {
+        width: 400px;
+        height: auto; }
+        #mainMatches .estadisticas .estadisticas-title .text-estadisticas-title {
+          font-size: 32px; }
+        #mainMatches .estadisticas .marcador .win .textmarcador,
+        #mainMatches .estadisticas .marcador .lose .textmarcador,
+        #mainMatches .estadisticas .marcador .empate .textmarcador {
+          font-size: 60px; }
+        #mainMatches .estadisticas .marcador .win .numeros,
+        #mainMatches .estadisticas .marcador .lose .numeros,
+        #mainMatches .estadisticas .marcador .empate .numeros {
+          font-size: 45px; }
+        #mainMatches .estadisticas .win-rate .text-win-rate,
+        #mainMatches .estadisticas .win-rate .porcentaje-win {
+          font-size: 45px; } }
+  @media (max-width: 1200px) {
+    #mainMatches {
+      grid-template-columns: 1fr;
+      margin: 20px !important; }
+      #mainMatches #results {
+        grid-auto-rows: auto;
+        gap: 30px; }
+        #mainMatches #results .partido img {
+          margin-left: 20px !important;
+          height: 70px; }
+      #mainMatches .estadisticas {
+        width: 90%;
+        height: auto;
+        margin: 0 auto !important; }
+        #mainMatches .estadisticas .estadisticas-title .text-estadisticas-title {
+          font-size: 28px; }
+        #mainMatches .estadisticas .partidosjugados .text-partidosJugados {
+          font-size: 20px;
+          margin-left: 20px !important; }
+        #mainMatches .estadisticas .marcador .win .textmarcador,
+        #mainMatches .estadisticas .marcador .lose .textmarcador,
+        #mainMatches .estadisticas .marcador .empate .textmarcador {
+          font-size: 50px; }
+        #mainMatches .estadisticas .marcador .win .numeros,
+        #mainMatches .estadisticas .marcador .lose .numeros,
+        #mainMatches .estadisticas .marcador .empate .numeros {
+          font-size: 35px; }
+        #mainMatches .estadisticas .win-rate .text-win-rate,
+        #mainMatches .estadisticas .win-rate .porcentaje-win {
+          font-size: 35px; } }
+  @media (max-width: 730px) {
+    #mainMatches {
+      margin: 10px !important; }
+      #mainMatches #results .partido {
+        flex-direction: column;
+        padding: 10px; }
+        #mainMatches #results .partido img {
+          margin-left: 0 !important;
+          margin-bottom: 10px !important; }
+        #mainMatches #results .partido .color-derrota,
+        #mainMatches #results .partido .color-victoria,
+        #mainMatches #results .partido .color-empate {
+          width: 100%;
+          height: 10px;
+          top: auto;
+          bottom: 0;
+          right: 0; }
+      #mainMatches .estadisticas .estadisticas-title .text-estadisticas-title {
+        font-size: 24px; }
+      #mainMatches .estadisticas .partidosjugados .text-partidosJugados {
+        font-size: 18px;
+        margin-left: 0 !important; }
+      #mainMatches .estadisticas .marcador .win,
+      #mainMatches .estadisticas .marcador .lose,
+      #mainMatches .estadisticas .marcador .empate {
+        margin-top: 20px !important; }
+        #mainMatches .estadisticas .marcador .win .textmarcador,
+        #mainMatches .estadisticas .marcador .lose .textmarcador,
+        #mainMatches .estadisticas .marcador .empate .textmarcador {
+          font-size: 40px; }
+        #mainMatches .estadisticas .marcador .win .numeros,
+        #mainMatches .estadisticas .marcador .lose .numeros,
+        #mainMatches .estadisticas .marcador .empate .numeros {
+          font-size: 30px; }
+      #mainMatches .estadisticas .win-rate .text-win-rate,
+      #mainMatches .estadisticas .win-rate .porcentaje-win {
+        font-size: 30px; } }
+
+/*---------------Fin de matches-------------------*/
+.mainPlayers .card-text {
+  padding: 15px;
+  height: auto;
+  width: 35vw;
+  color: #F5F5F7;
+  border: 1px #F5F5F7 solid;
+  background-color: black; }
+  .mainPlayers .card-text .card-text-title1 {
+    display: flex; }
+    .mainPlayers .card-text .card-text-title1 .cudradito {
+      margin-right: 10px;
+      position: relative;
+      top: 20px;
+      background-color: #B60525;
+      height: 20px;
+      width: 5px; }
+  .mainPlayers .card-text .card-text-subtitle {
+    margin-top: -10px;
+    font-size: 25px; }
+  .mainPlayers .card-text .card-text-p {
+    margin-top: 10px;
+    font-size: 16px;
+    width: 33vw;
+    color: #838383; }
+  .mainPlayers .card-text .card-text-icon {
+    margin-top: 5vh;
+    margin-left: 5vw; }
+    .mainPlayers .card-text .card-text-icon img {
+      margin: 20px;
+      height: 25px; }
+.mainPlayers .card-image {
+  object-fit: contain; }
+  .mainPlayers .card-image .card-image-title {
+    padding: 10px 0 10px 30px;
+    background-color: black;
+    position: relative;
+    height: 70px;
+    border-left: 5px #B60525 solid;
+    border-right: 5px #B60525 solid;
+    border-top: 5px #B60525 solid; }
+    .mainPlayers .card-image .card-image-title h2 {
+      margin-top: 10px;
+      color: #B60525;
+      font-size: 50px; }
+  .mainPlayers .card-image img {
+    height: 60vh;
+    border: 5px #B60525 solid; }
+.mainPlayers .players {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 200px;
+  min-height: 100dvh; }
+@media (max-width: 1024px) {
+  .mainPlayers .players {
+    gap: 60px; }
+  .mainPlayers .card-text {
+    width: 45vw; }
+    .mainPlayers .card-text .card-text-p {
+      width: 40vw; }
+  .mainPlayers .card-image img {
+    height: 50vh; } }
+@media (max-width: 768px) {
+  .mainPlayers .players {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px; }
+  .mainPlayers .card-text,
+  .mainPlayers .card-image {
+    width: 90vw; }
+  .mainPlayers .card-text .card-text-p {
+    width: 80vw; }
+  .mainPlayers .card-image img {
+    height: 45vh; } }
+@media (max-width: 480px) {
+  .mainPlayers .players {
+    gap: 20px;
+    padding: 10px; }
+  .mainPlayers .card-text {
+    font-size: 0.9rem; }
+    .mainPlayers .card-text .card-text-title1 h2,
+    .mainPlayers .card-text .card-text-subtitle h2 {
+      font-size: 1.3rem; }
+  .mainPlayers .card-image img {
+    max-width: 250px;
+    height: auto; } }
+
+/*# sourceMappingURL=main.css.map */
